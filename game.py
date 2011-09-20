@@ -1,6 +1,6 @@
-import curses, os
+import curses
 
-from news.news import load_graphic
+from news.news import loadgraphics
 
 def quit(stdscr):
     """Return terminal settings to normal"""
@@ -22,7 +22,7 @@ def main():
     # begin game loop
     stdscr.keypad(1)
     curses.raw()
-    bigletters, newstops, newspic = (load_graphic(os.path.join('art', fn)) for fn in ('largecap.cpc', 'newstops.cpc', 'newspic.cpc'))
+    bigletters, newstops, newspic = loadgraphics()
 
     # quit game
     quit(stdscr)
