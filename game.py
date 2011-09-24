@@ -1,6 +1,8 @@
 import curses
 
 from news.news import loadgraphics
+from title.titlescreen import loadinitfile
+from configfile import readConfigFile
 
 def quit(stdscr):
     """Return terminal settings to normal"""
@@ -22,7 +24,17 @@ def main():
     # begin game loop
     stdscr.keypad(1)
     curses.raw()
+
     bigletters, newstops, newspic = loadgraphics()
+
+    loadinitfile() # does nothing yet, possible deprecated
+
+    # load site map data
+    oldMapMode = readConfigFile('sitemaps.txt')
+    if not oldMapMode:
+        stdscr.addstr('Failed to load sitemaps.txt! Reverting to old map mode.')
+        stdscr.refresh()
+        stdscr.getch()
 
     # quit game
     quit(stdscr)
